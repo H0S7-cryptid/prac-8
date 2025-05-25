@@ -1,5 +1,4 @@
 #include "Smartphone.h"
-#include "Price.h"
 
 Smartphone::Smartphone() {
 	model = "";
@@ -8,7 +7,7 @@ Smartphone::Smartphone() {
 	storage = 1;
 	os = UNDEFO;
 	price.setPrice(0);
-	price.setCurrency(USD);
+	price.setCurrency(RUB);
 	color = UNDEFC;
 	ram = 1;
 	cpu = UNDEFM;
@@ -18,9 +17,10 @@ Smartphone::Smartphone() {
 
 Smartphone::Smartphone(string model, double price, Manufacturer manufacturer,
 	Color color, float display, short ram,
-	short storage, Manufacturer cpu, Os os, short ncams, Protection protection) {
+	short storage, Manufacturer cpu, Os os, short ncams, Protection protection, Mtype currency) {
 	this->model = model;
-	this->price. = price;
+	this->price.setPrice(price);
+	this->price.setCurrency(currency);
 	this->manufacturer = manufacturer;
 	this->color = color;
 	this->display = display;
@@ -93,7 +93,7 @@ short Smartphone::getNCams() const {
 	return ncams;
 }
 
-void Smartphone::setPrice(double c, Mtype def = USD) {
+void Smartphone::setPrice(double c, Mtype def) {
 	price.setPrice(c);
 	price.setCurrency(def);
 }
@@ -101,7 +101,7 @@ void Smartphone::setPrice(double c, Mtype def = USD) {
 void Smartphone::Print() const {
 	cout << ManufacturerNames[manufacturer] << endl;
 	cout << model << endl;
-	cout << "Price: " << price.getAmount() << MtypeNames[price.getCurrency()] << endl;
+	cout << "Price: " << price.getAmount() << MtypeName[price.getCurrency()] << endl;
 	cout << "Color: " << ColorNames[color] << endl;
 	cout << "Display: " << display << endl;
 	cout << "OS: " << OsNames[os] << std::endl;
